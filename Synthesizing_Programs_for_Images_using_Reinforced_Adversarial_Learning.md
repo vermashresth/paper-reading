@@ -31,3 +31,39 @@ For Generator
 The authors here have used maximization of expected return using RL (REINFORCE algo)
 - The reward is set to 0 for time steps upto N and then for Nth timestep, it is score of discriminator on the generated image.
 - Intermediate rewards could  be added to bias the search.
+
+Conditional Generation (Didnt UNderstand much)
+- Finding a specific program that generates an image Xtarget 
+
+Distributed LEarning
+- Extension of Impala
+- Actor workers for generating trajectories of PIt, at; Policy Learner for optimizing PIt, Discriminator LEarner for optimizing discriminator
+- For WGAN, better to update Discriminator more frequently than generator. HEre, generation is expensive, hence they use replay buffer and for communication between actor and discrimator and D is optimized at higher rate due to differences in network sizes.
+
+## Experiments
+- Action space for strokes: 8 tuple, 1st 2nd are start and end point definining bezier curve, next 5 control preasuure, brush size, RGB, last is binary value, produce stroke or jump right
+- Rewards in MNIST: To encourage single continous motion of brush, small negative reward for starting each continous sequence of strokes. Also penalize for not producing any visible strokes.
+- Mujoco (COuldnt understand very well)
+
+## Results and Future Scope
+-  Using  Wasserstein discriminator’s output as a reward
+function with asynchronous reinforcement learning can provide
+a scaling path for visual program synthesis.
+
+- The current
+exploration strategy used in the agent is entropy-based, but
+future work should address this limitation by employing sophisticated
+search algorithms for policy improvement. For
+instance, Monte Carlo Tree Search can be used, analogous
+to AlphaGo Zero 
+
+- the use of two arbitrary control
+points is perhaps not the best way to represent strokes, as it
+is hard to deal with straight lines. Actions could also directly parametrize 3D surfaces, planes and learned texture models
+to invert richer visual scenes.
+
+- On the reward side, using
+a joint image-action discriminator similar to BiGAN/ALI the policy can viewed as an encoder, while the renderer becomes
+a decoder) could result in a more meaningful learning
+signal, since D will be forced to focus on the semantics of
+the image.
